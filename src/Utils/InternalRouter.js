@@ -14,7 +14,6 @@ const InternalRouter = () => {
                 <Route exact path='/favorites' element={<Favorites />} />
             </Routes>
         </Router>
-
     );
 }
 
