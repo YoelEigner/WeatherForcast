@@ -57,29 +57,40 @@ export const Home = () => {
 
     const addToFave = async () => {
         let temp = await GetConditionsDL(selectedCity.key)
-        dispatch({ type: "FAVORITES", payload: { name: selectedCity.value, id: selectedCity.key, weather: temp } })
+        let payload = selectedCity.value !== undefined ? selectedCity.value : "Tel Aviv"
+        dispatch({ type: "FAVORITES", payload: { name: payload, id: selectedCity.key, weather: temp } })
+
         setFaveBtn("Added To Favorites")
         setDisabled(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(async () => {
-        let resp = await GetByLocationService(geoLocation.lat + "," + geoLocation.long)
-        resp !== undefined && handleChange({ key: resp })
-        resp !== undefined && setSelectedCity({ key: resp })
-    }, [geoLocation])
-
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        geo.getCurrentPosition((success, error) => {
-            if (error) { console.log(error) }
-            else { setGeoLocation({ lat: success.coords.latitude, long: success.coords.longitude }) }
-        })
+        const fetchData = async () => {
+            let resp = await GetByLocationService(geoLocation.lat + "," + geoLocation.long)
+            resp !== undefined && handleChange({ key: resp })
+            resp !== undefined && setSelectedCity({ key: resp })
+            dispatch({ type: "LOCATION", payload: geoLocation })
+        }
+        fetchData();
+    }, [geoLocation]);
+    // useEffect(async () => {
+    //     let resp = await GetByLocationService(geoLocation.lat + "," + geoLocation.long)
+    //     resp !== undefined && handleChange({ key: resp })
+    //     resp !== undefined && setSelectedCity({ key: resp })
+    //     dispatch({ type: "LOCATION", payload: geoLocation })
+    // }, [geoLocation])
+
+
+    useEffect(() => {
+        storeData.Location.lat === '' &&
+            geo.getCurrentPosition((success, error) => {
+                if (error) { console.log(error) }
+                else { setGeoLocation({ lat: success.coords.latitude, long: success.coords.longitude }) }
+            })
         if (name !== undefined) {
             setDefaultCity({ "value": name, "label": name })
             isFave(name)
             handleChange({ key: key })
-            setSelectedCity({ key: key })
+            setSelectedCity({ "value": name, "label": name, key: key })
 
         }
         else {

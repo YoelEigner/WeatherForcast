@@ -4,7 +4,8 @@ const appReducer = (state = {
     Error: "",
     FavoritesWeather: [],
     DefaultCity: "Test",
-    Theme : "theme-dark"
+    Theme: "theme-dark",
+    Location: "",
 }, action) => {
     switch (action.type) {
         case "TEMPERATURE":
@@ -17,6 +18,8 @@ const appReducer = (state = {
             return { ...state, DefaultCity: action.payload };
         case "THEME":
             return { ...state, Theme: action.payload };
+        case "LOCATION":
+            return { ...state, Location: action.payload };
         default:
             return state;
     }

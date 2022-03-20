@@ -43,12 +43,11 @@ export const NavBar = ({ children }) => {
                 <Container>
                     <Navbar.Brand href="/" >Home</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/favorites" active={isActive("/favorites")}>Favorites</Nav.Link>
-                        <Nav.Link href="#C" active={isActive("/#C")} onClick={() => changeTemp("Metric")}>C</Nav.Link>
+                        <Nav.Link href="/#/favorites" active={isActive("/favorites")}>Favorites</Nav.Link>
+                        <Nav.Link href="#" active={isActive("/#C")} onClick={() => changeTemp("Metric")}>C</Nav.Link>
                         <Navbar.Text>/</Navbar.Text>
-                        <Nav.Link href="#F" active={isActive("/#F")} onClick={() => changeTemp("Imperial")}>F</Nav.Link>
+                        <Nav.Link href="#" active={isActive("/#F")} onClick={() => changeTemp("Imperial")}>F</Nav.Link>
                     </Nav>
-                    {console.log(storeData.Theme)}
                     <BootstrapSwitchButton
                         checked={storeData.Theme === 'theme-dark' ? true : false}
                         onlabel='Dark'

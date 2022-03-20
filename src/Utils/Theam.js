@@ -9,7 +9,6 @@ const setTheme = (themeName) => {
 
 const keepTheme = () => {
     const state = store.getState();
-    console.log(state.Theme)
     if (state.Theme === 'theme-dark') {
         setTheme('theme-dark');
     } else if (state.Theme === 'theme-light') {
