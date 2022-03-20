@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Form, Nav, Navbar } from "react-bootstrap"
+import React from 'react'
+import { Container, Nav, Navbar } from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom';
 import { Theme } from '../Utils/Theam';
@@ -9,7 +9,6 @@ export const NavBar = ({ children }) => {
     const dispatch = useDispatch()
     const location = useLocation()
     const storeData = useSelector(state => state)
-    const [checked, setChecked] = useState(storeData.Theme === 'theme-dark' ? true : false)
 
     const changeTemp = (value) => {
         setTimeout(() => {

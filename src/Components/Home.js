@@ -32,7 +32,7 @@ export const Home = () => {
     };
     useEffect(() => {
         setTemperature(storeData.Temperature)
-    }, [storeData.Temperature.length])
+    }, [storeData.Temperature, storeData.Temperature.length])
 
     const isFave = (e) => {
         let temp = storeData.Favorites.find(x => x.name == e)
@@ -72,19 +72,15 @@ export const Home = () => {
         }
         fetchData();
     }, [geoLocation]);
-    // useEffect(async () => {
-    //     let resp = await GetByLocationService(geoLocation.lat + "," + geoLocation.long)
-    //     resp !== undefined && handleChange({ key: resp })
-    //     resp !== undefined && setSelectedCity({ key: resp })
-    //     dispatch({ type: "LOCATION", payload: geoLocation })
-    // }, [geoLocation])
-
 
     useEffect(() => {
         storeData.Location.lat === '' &&
-            geo.getCurrentPosition((success, error) => {
+            navigator.geolocation.getCurrentPosition((success, error) => {
                 if (error) { console.log(error) }
-                else { setGeoLocation({ lat: success.coords.latitude, long: success.coords.longitude }) }
+                else {
+                    console.log(storeData.Location)
+                    setGeoLocation({ lat: success.coords.latitude, long: success.coords.longitude })
+                }
             })
         if (name !== undefined) {
             setDefaultCity({ "value": name, "label": name })

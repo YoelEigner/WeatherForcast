@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Col, Card, Row } from 'react-bootstrap';
+import { Col, Card, Row } from 'react-bootstrap';
 import { NavBar } from './NavBar';
 import { useSelector } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './../Utils/ErrorFallback';
-import GetConditionsDL from '../DAL/GetConditionsDL';
 import { useNavigate } from "react-router-dom";
 
 export const Favorites = () => {
